@@ -14,7 +14,7 @@
     "VyouPlugin.podspec"
   ],
   "author": "andreas@vyou.art",
-  "license": "MIT",
+  "license": "prop",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/you-art/vyou-plugin.git"

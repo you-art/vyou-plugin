@@ -1,3 +1,3 @@
 export interface vyouPluginPlugin {
-  echo(options: { value: string }): Promise<{ value: string }>;
+  ping(options: {ipAddress: string, timeOut?: number, retries?: number}): Promise<{pings : number,pongs : number, avgRtt: number | undefined}>;
 }
