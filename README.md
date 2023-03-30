@@ -14,6 +14,7 @@ npx cap sync
 <docgen-index>
 
 * [`ping(...)`](#ping)
+* [`listenToSsdp(...)`](#listentossdp)
 
 </docgen-index>
 
@@ -31,6 +32,19 @@ ping(options: { ipAddress: string; timeOut?: number; retries?: number; }) => Pro
 | **`options`** | <code>{ ipAddress: string; timeOut?: number; retries?: number; }</code> |
 
 **Returns:** <code>Promise&lt;{ pings: number; pongs: number; avgRtt: number; }&gt;</code>
+
+--------------------
+
+
+### listenToSsdp(...)
+
+```typescript
+listenToSsdp(options: { serviceId: string; callback: (ssdpRecord: string) => void; }) => Promise<void>
+```
+
+| Param         | Type                                                                           |
+| ------------- | ------------------------------------------------------------------------------ |
+| **`options`** | <code>{ serviceId: string; callback: (ssdpRecord: string) =&gt; void; }</code> |
 
 --------------------
 

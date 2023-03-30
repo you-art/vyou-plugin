@@ -3,6 +3,9 @@ import {WebPlugin} from '@capacitor/core';
 import type {vyouPluginPlugin} from './definitions';
 
 export class vyouPluginWeb extends WebPlugin implements vyouPluginPlugin {
+  async listenToSsdp(options: {serviceId: string; callback: (ssdpRecord: string) => void;}): Promise<void> {
+    console.log('Method not implemented.', options);
+  }
   async ping(options: {ipAddress: string, timeOut: number | undefined, retries: number | undefined}): Promise<{pings: number, pongs: number, avgRtt: number | undefined}> {
     options.timeOut = options.timeOut ?? 1000
     options.retries = options.retries ?? 1
