@@ -17,7 +17,11 @@ import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
 import java.util.Iterator;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,7 +29,8 @@ import org.json.JSONObject;
 
 @CapacitorPlugin(name = "vyouPlugin")
 public class vyouPluginPlugin extends Plugin {
-
+    ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+  
     @PluginMethod
     public void ping(PluginCall call) {
         JSObject ret = new JSObject();
@@ -122,5 +127,23 @@ public class vyouPluginPlugin extends Plugin {
             System.out.println(" Exception:" + e);
         }
         return r;
+    }
+
+    @Override
+    protected void handleOnStart() {
+  //      startSelectorThread();
+    //    LocalBroadcastManager.getInstance(getContext()).registerReceiver(dataForwardReceiver, new IntentFilter("capacitor-udp-forward"));
+    }
+
+    @Override
+    protected void handleOnStop() {
+        Log.i("lifecycle", "stop");
+       // stopSelectorThread();
+    }
+
+    @Override
+    protected void handleOnRestart() {
+        Log.i("lifecycle", "restart");
+       //   startSelectorThread();
     }
 }
