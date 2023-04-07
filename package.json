@@ -4,7 +4,7 @@
   "description": "Vyou Specific Capacitor features",
 
   "module": "dist/esm/index.js",
-  "main": "dist/plugin.cjs.js",
+
   "types": "dist/esm/index.d.ts",
   "unpkg": "dist/plugin.js",
   "files": [
