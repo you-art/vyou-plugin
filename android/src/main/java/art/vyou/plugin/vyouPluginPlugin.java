@@ -1,5 +1,6 @@
 package art.vyou.plugin;
 
+import android.os.Build;
 import android.util.Log;
 import java.io.BufferedReader;
 
@@ -144,6 +145,80 @@ public class vyouPluginPlugin extends Plugin {
     @Override
     protected void handleOnRestart() {
         Log.i("lifecycle", "restart");
-       //   startSelectorThread();
+        //   startSelectorThread();
+    }
+    
+    private Network networkImpl;
+    public static final String NETWORK_CHANGE_EVENT = "networkStatusChange";
+
+    /**
+     * Monitor for network status changes and fire our event.
+     */
+    @Override
+    public void load() {
+        networkImpl = new Network(getContext());
+        Network.NetworkStatusChangeListener listener = wasLostEvent -> {
+            if (wasLostEvent) {
+                JSObject jsObject = new JSObject();
+                jsObject.put("connected", false);
+                jsObject.put("connectionType", "none");
+                notifyListeners(NETWORK_CHANGE_EVENT, jsObject);
+            } else {
+                updateNetworkStatus();
+            }
+        };
+        networkImpl.setStatusChangeListener(listener);
+    }
+
+    /**
+     * Clean up callback to prevent leaks.
+     */
+    @Override
+    protected void handleOnDestroy() {
+        networkImpl.setStatusChangeListener(null);
+    }
+
+    /**
+     * Get current network status information.
+     * @param call
+     */
+    @PluginMethod
+    public void getConnectionStatus(PluginCall call) {
+        call.resolve(parseNetworkStatus(networkImpl.getNetworkStatus()));
+    }
+
+    /**
+     * Register the IntentReceiver on resume
+     */
+    @Override
+    protected void handleOnResume() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            networkImpl.startMonitoring();
+        } else {
+            networkImpl.startMonitoring(getActivity());
+        }
+    }
+
+    /**
+     * Unregister the IntentReceiver on pause to avoid leaking it
+     */
+    @Override
+    protected void handleOnPause() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            networkImpl.stopMonitoring();
+        } else {
+            networkImpl.stopMonitoring(getActivity());
+        }
+    }
+
+    private void updateNetworkStatus() {
+        notifyListeners(NETWORK_CHANGE_EVENT, parseNetworkStatus(networkImpl.getNetworkStatus()));
+    }
+
+    private JSObject parseNetworkStatus(NetworkStatus networkStatus) {
+        JSObject jsObject = new JSObject();
+        jsObject.put("connected", networkStatus.connected);
+        jsObject.put("connectionType", networkStatus.connectionType.getConnectionType());
+        return jsObject;
     }
 }
