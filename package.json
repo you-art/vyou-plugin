@@ -1,10 +1,9 @@
 {
   "name": "vyou-plugin",
-  "version": "0.0.2",
+  "version": "0.0.21",
   "description": "Vyou Specific Capacitor features",
-
+  "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
-
   "types": "dist/esm/index.d.ts",
   "unpkg": "dist/plugin.js",
   "files": [
