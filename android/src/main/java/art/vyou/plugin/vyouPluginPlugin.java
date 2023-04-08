@@ -220,6 +220,8 @@ public class vyouPluginPlugin extends Plugin {
         JSObject jsObject = new JSObject();
         jsObject.put("connected", networkStatus.connected);
         jsObject.put("connectionType", networkStatus.connectionType.getConnectionType());
+        jsObject.put("ssid", networkStatus.ssid);
+        jsObject.put("bssid", networkStatus.bssid);
         return jsObject;
     }
 }

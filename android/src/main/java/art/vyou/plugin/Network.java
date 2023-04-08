@@ -121,6 +121,8 @@ public class Network {
         }
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         Log.i("WifiInfo: ", wifiInfo.toString());
+        networkStatus.ssid = wifiInfo.getSSID();
+        networkStatus.bssid = wifiInfo.getBSSID();
         return networkStatus;
     }
 
