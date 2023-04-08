@@ -123,6 +123,20 @@
             "ConnectionType"
           ],
           "type": "ConnectionType"
+        },
+        {
+          "name": "ssid",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "bssid",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string | undefined"
         }
       ]
     },

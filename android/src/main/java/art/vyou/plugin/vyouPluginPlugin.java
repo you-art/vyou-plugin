@@ -187,6 +187,7 @@ public class vyouPluginPlugin extends Plugin {
         call.resolve(parseNetworkStatus(networkImpl.getNetworkStatus()));
     }
 
+
     /**
      * Register the IntentReceiver on resume
      */

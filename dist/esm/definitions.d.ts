@@ -50,6 +50,8 @@ export interface ConnectionStatus {
      * @since 1.0.0
      */
     connectionType: ConnectionType;
+    ssid: string | undefined;
+    bssid: string | undefined;
 }
 /**
  * Callback to receive the status change notifications.

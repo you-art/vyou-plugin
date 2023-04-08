@@ -66,7 +66,7 @@ export class vyouPluginWeb extends WebPlugin implements vyouPluginPlugin {
     }
   }
 
-  async ping(options: {ipAddress: string, timeOut: number | undefined, retries: number | undefined}): Promise<{pings: number, pongs: number, avgRtt: number | undefined}> {
+  ping = async (options: {ipAddress: string, timeOut: number | undefined, retries: number | undefined}): Promise<{pings: number, pongs: number, avgRtt: number | undefined}> => {
     options.timeOut = options.timeOut ?? 1000
     options.retries = options.retries ?? 1
     return {
@@ -76,7 +76,7 @@ export class vyouPluginWeb extends WebPlugin implements vyouPluginPlugin {
     }
   }
 
-  async getConnectionStatus(): Promise<ConnectionStatus> {
+  getConnectionStatus = async (): Promise<ConnectionStatus> => {
     if (!window.navigator) {
       throw this.unavailable(
         'Browser does not support the Network Information API',
@@ -89,6 +89,8 @@ export class vyouPluginWeb extends WebPlugin implements vyouPluginPlugin {
     const status: ConnectionStatus = {
       connected,
       connectionType: connected ? connectionType : 'none',
+      ssid: undefined,
+      bssid: undefined
     };
 
     return status;
@@ -100,6 +102,8 @@ export class vyouPluginWeb extends WebPlugin implements vyouPluginPlugin {
     const status: ConnectionStatus = {
       connected: true,
       connectionType: connectionType,
+      ssid: undefined,
+      bssid: undefined
     };
 
     this.notifyListeners('networkStatusChange', status);
@@ -109,6 +113,8 @@ export class vyouPluginWeb extends WebPlugin implements vyouPluginPlugin {
     const status: ConnectionStatus = {
       connected: false,
       connectionType: 'none',
+      ssid: undefined,
+      bssid: undefined
     };
 
     this.notifyListeners('networkStatusChange', status);

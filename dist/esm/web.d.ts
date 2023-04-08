@@ -9,16 +9,16 @@ declare global {
 }
 export declare class vyouPluginWeb extends WebPlugin implements vyouPluginPlugin {
     constructor();
-    ping(options: {
+    ping: (options: {
         ipAddress: string;
         timeOut: number | undefined;
         retries: number | undefined;
-    }): Promise<{
+    }) => Promise<{
         pings: number;
         pongs: number;
         avgRtt: number | undefined;
     }>;
-    getConnectionStatus(): Promise<ConnectionStatus>;
+    getConnectionStatus: () => Promise<ConnectionStatus>;
     private handleOnline;
     private handleOffline;
 }

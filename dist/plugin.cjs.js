@@ -49,11 +49,37 @@ function translatedConnection() {
 class vyouPluginWeb extends core.WebPlugin {
     constructor() {
         super();
+        this.ping = async (options) => {
+            var _a, _b;
+            options.timeOut = (_a = options.timeOut) !== null && _a !== void 0 ? _a : 1000;
+            options.retries = (_b = options.retries) !== null && _b !== void 0 ? _b : 1;
+            return {
+                pings: options.retries,
+                pongs: Math.floor(Math.random() * options.retries),
+                avgRtt: Math.random() * 100
+            };
+        };
+        this.getConnectionStatus = async () => {
+            if (!window.navigator) {
+                throw this.unavailable('Browser does not support the Network Information API');
+            }
+            const connected = window.navigator.onLine;
+            const connectionType = translatedConnection();
+            const status = {
+                connected,
+                connectionType: connected ? connectionType : 'none',
+                ssid: undefined,
+                bssid: undefined
+            };
+            return status;
+        };
         this.handleOnline = () => {
             const connectionType = translatedConnection();
             const status = {
                 connected: true,
                 connectionType: connectionType,
+                ssid: undefined,
+                bssid: undefined
             };
             this.notifyListeners('networkStatusChange', status);
         };
@@ -61,6 +87,8 @@ class vyouPluginWeb extends core.WebPlugin {
             const status = {
                 connected: false,
                 connectionType: 'none',
+                ssid: undefined,
+                bssid: undefined
             };
             this.notifyListeners('networkStatusChange', status);
         };
@@ -68,28 +96,6 @@ class vyouPluginWeb extends core.WebPlugin {
             window.addEventListener('online', this.handleOnline);
             window.addEventListener('offline', this.handleOffline);
         }
-    }
-    async ping(options) {
-        var _a, _b;
-        options.timeOut = (_a = options.timeOut) !== null && _a !== void 0 ? _a : 1000;
-        options.retries = (_b = options.retries) !== null && _b !== void 0 ? _b : 1;
-        return {
-            pings: options.retries,
-            pongs: Math.floor(Math.random() * options.retries),
-            avgRtt: Math.random() * 100
-        };
-    }
-    async getConnectionStatus() {
-        if (!window.navigator) {
-            throw this.unavailable('Browser does not support the Network Information API');
-        }
-        const connected = window.navigator.onLine;
-        const connectionType = translatedConnection();
-        const status = {
-            connected,
-            connectionType: connected ? connectionType : 'none',
-        };
-        return status;
     }
 }
 

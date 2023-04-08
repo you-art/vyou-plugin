@@ -5,10 +5,17 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.NetworkCapabilities;
+
+
+import android.net.wifi.WifiManager;
+import android.net.wifi.WifiInfo;
 import android.net.ConnectivityManager;
 import android.net.ConnectivityManager.NetworkCallback;
-import android.net.NetworkCapabilities;
+
 import android.os.Build;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -45,7 +52,7 @@ public class Network {
     private Context context;
     private ConnectivityManager connectivityManager;
     private BroadcastReceiver receiver;
-
+    private WifiManager wifiManager;
     /**
      * Create network monitoring object.
      * @param context
@@ -65,6 +72,7 @@ public class Network {
         } else {
             this.connectivityCallback = new ConnectivityCallback();
         }
+        wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
     }
 
     /**
@@ -111,6 +119,8 @@ public class Network {
         } else {
             networkStatus = getAndParseNetworkInfo();
         }
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        Log.i("WifiInfo: ", wifiInfo.toString());
         return networkStatus;
     }
 
@@ -156,4 +166,7 @@ public class Network {
     public void stopMonitoring(@NonNull AppCompatActivity activity) {
         activity.unregisterReceiver(receiver);
     }
+
+    // wifi stuff
+
 }

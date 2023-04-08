@@ -99,6 +99,8 @@ Represents the state and type of the network connection.
 | -------------------- | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----- |
 | **`connected`**      | <code>boolean</code>                                      | Whether there is an active connection or not.                                                                                 | 1.0.0 |
 | **`connectionType`** | <code><a href="#connectiontype">ConnectionType</a></code> | The type of network connection currently in use. If there is no active network connection, `connectionType` will be `'none'`. | 1.0.0 |
+| **`ssid`**           | <code>string</code>                                       |                                                                                                                               |       |
+| **`bssid`**          | <code>string</code>                                       |                                                                                                                               |       |
 
 
 #### PluginListenerHandle

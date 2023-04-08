@@ -30,6 +30,7 @@ export interface vyouPluginPlugin {
    * @since 1.0.0
    */
   removeAllListeners(): Promise<void>;
+
 }
 
 /**
@@ -53,6 +54,9 @@ export interface ConnectionStatus {
    * @since 1.0.0
    */
   connectionType: ConnectionType;
+
+  ssid: string | undefined;
+  bssid : string | undefined;
 }
 
 /**
