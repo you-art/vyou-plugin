@@ -66,7 +66,8 @@ var capacitorvyouPlugin = (function (exports, core) {
                     connected,
                     connectionType: connected ? connectionType : 'none',
                     ssid: undefined,
-                    bssid: undefined
+                    bssid: undefined,
+                    networkId: undefined
                 };
                 return status;
             };
@@ -76,7 +77,8 @@ var capacitorvyouPlugin = (function (exports, core) {
                     connected: true,
                     connectionType: connectionType,
                     ssid: undefined,
-                    bssid: undefined
+                    bssid: undefined,
+                    networkId: undefined
                 };
                 this.notifyListeners('networkStatusChange', status);
             };
@@ -85,7 +87,8 @@ var capacitorvyouPlugin = (function (exports, core) {
                     connected: false,
                     connectionType: 'none',
                     ssid: undefined,
-                    bssid: undefined
+                    bssid: undefined,
+                    networkId: undefined
                 };
                 this.notifyListeners('networkStatusChange', status);
             };
@@ -93,6 +96,12 @@ var capacitorvyouPlugin = (function (exports, core) {
                 window.addEventListener('online', this.handleOnline);
                 window.addEventListener('offline', this.handleOffline);
             }
+        }
+        async checkPermissions() {
+            return { detailedNetwork: 'denied' };
+        }
+        requestDetailedNetworkStatus() {
+            throw this.unavailable('Permissions API not available in this browser');
         }
     }
 

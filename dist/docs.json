@@ -39,6 +39,30 @@
         "slug": "getconnectionstatus"
       },
       {
+        "name": "checkPermissions",
+        "signature": "() => Promise<PermissionStatus>",
+        "parameters": [],
+        "returns": "Promise<PermissionStatus>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "PermissionStatus"
+        ],
+        "slug": "checkpermissions"
+      },
+      {
+        "name": "requestDetailedNetworkStatus",
+        "signature": "() => Promise<ConnectionStatus>",
+        "parameters": [],
+        "returns": "Promise<ConnectionStatus>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "ConnectionStatus"
+        ],
+        "slug": "requestdetailednetworkstatus"
+      },
+      {
         "name": "addListener",
         "signature": "(eventName: 'networkStatusChange', listenerFunc: ConnectionStatusChangeListener) => Promise<PluginListenerHandle> & PluginListenerHandle",
         "parameters": [
@@ -137,6 +161,36 @@
           "docs": "",
           "complexTypes": [],
           "type": "string | undefined"
+        },
+        {
+          "name": "networkId",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "number | undefined"
+        }
+      ]
+    },
+    {
+      "name": "PermissionStatus",
+      "slug": "permissionstatus",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "detailedNetwork",
+          "tags": [
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "Permission state for location alias.\r\n\r\nOn Android it requests/checks both ACCESS_COARSE_LOCATION and\r\nACCESS_FINE_LOCATION permissions.\r\n\r\nOn iOS and web it requests/checks location permission.",
+          "complexTypes": [
+            "PermissionState"
+          ],
+          "type": "PermissionState"
         }
       ]
     },
@@ -178,6 +232,29 @@
         },
         {
           "text": "'unknown'",
+          "complexTypes": []
+        }
+      ]
+    },
+    {
+      "name": "PermissionState",
+      "slug": "permissionstate",
+      "docs": "",
+      "types": [
+        {
+          "text": "'prompt'",
+          "complexTypes": []
+        },
+        {
+          "text": "'prompt-with-rationale'",
+          "complexTypes": []
+        },
+        {
+          "text": "'granted'",
+          "complexTypes": []
+        },
+        {
+          "text": "'denied'",
           "complexTypes": []
         }
       ]

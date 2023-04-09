@@ -1,4 +1,4 @@
-import {PluginListenerHandle} from "@capacitor/core";
+import {PermissionState, PluginListenerHandle} from "@capacitor/core";
 
 export type CallbackID = string
 
@@ -13,7 +13,9 @@ export interface vyouPluginPlugin {
    * @since 1.0.0
    */
   getConnectionStatus(): Promise<ConnectionStatus>;
-
+  checkPermissions(): Promise<PermissionStatus>;
+  requestDetailedNetworkStatus(): Promise<ConnectionStatus>
+  
   /**
    * Listen for changes in the network connection.
    *
@@ -30,6 +32,8 @@ export interface vyouPluginPlugin {
    * @since 1.0.0
    */
   removeAllListeners(): Promise<void>;
+
+
 
 }
 
@@ -56,7 +60,8 @@ export interface ConnectionStatus {
   connectionType: ConnectionType;
 
   ssid: string | undefined;
-  bssid : string | undefined;
+  bssid: string | undefined;
+  networkId : number | undefined;
 }
 
 /**
@@ -84,3 +89,22 @@ export type NetworkStatus = ConnectionStatus;
  * @since 1.0.0
  */
 export type NetworkStatusChangeCallback = ConnectionStatusChangeListener;
+export interface PermissionStatus {
+  /**
+   * Permission state for location alias.
+   *
+   * On Android it requests/checks both ACCESS_COARSE_LOCATION and
+   * ACCESS_FINE_LOCATION permissions.
+   *
+   * On iOS and web it requests/checks location permission.
+   *
+   * @since 1.0.0
+   */
+  detailedNetwork: PermissionState;
+
+}
+
+
+export interface VyouPluginPermissions {
+  permissions: PermissionStatus;
+}

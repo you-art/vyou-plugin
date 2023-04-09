@@ -53,6 +53,9 @@ public class Network {
     private ConnectivityManager connectivityManager;
     private BroadcastReceiver receiver;
     private WifiManager wifiManager;
+      private static final int LOCATION_REQUEST_CODE = 2; // Permissions request code
+  private static final int WIFI_SERVICE_INFO_CODE = 3;
+  private static final String ACCESS_FINE_LOCATION = android.Manifest.permission.ACCESS_FINE_LOCATION;
     /**
      * Create network monitoring object.
      * @param context
@@ -72,6 +75,7 @@ public class Network {
         } else {
             this.connectivityCallback = new ConnectivityCallback();
         }
+        //this.requestLocationPermission(LOCATION_REQUEST_CODE);
         wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
     }
 
@@ -123,6 +127,7 @@ public class Network {
         Log.i("WifiInfo: ", wifiInfo.toString());
         networkStatus.ssid = wifiInfo.getSSID();
         networkStatus.bssid = wifiInfo.getBSSID();
+        networkStatus.networkId = wifiInfo.getNetworkId();
         return networkStatus;
     }
 

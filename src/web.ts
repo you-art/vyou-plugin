@@ -3,7 +3,8 @@ import {WebPlugin} from '@capacitor/core';
 import type {
   vyouPluginPlugin,
   ConnectionStatus,
-  ConnectionType
+  ConnectionType,
+  PermissionStatus
 } from './definitions';
 
 declare global {
@@ -66,6 +67,14 @@ export class vyouPluginWeb extends WebPlugin implements vyouPluginPlugin {
     }
   }
 
+  async checkPermissions(): Promise<PermissionStatus> {
+    return {detailedNetwork: 'denied'};
+  }
+  requestDetailedNetworkStatus(): Promise<ConnectionStatus> {
+    throw this.unavailable('Permissions API not available in this browser');
+  }
+
+
   ping = async (options: {ipAddress: string, timeOut: number | undefined, retries: number | undefined}): Promise<{pings: number, pongs: number, avgRtt: number | undefined}> => {
     options.timeOut = options.timeOut ?? 1000
     options.retries = options.retries ?? 1
@@ -90,7 +99,8 @@ export class vyouPluginWeb extends WebPlugin implements vyouPluginPlugin {
       connected,
       connectionType: connected ? connectionType : 'none',
       ssid: undefined,
-      bssid: undefined
+      bssid: undefined,
+      networkId: undefined
     };
 
     return status;
@@ -103,7 +113,8 @@ export class vyouPluginWeb extends WebPlugin implements vyouPluginPlugin {
       connected: true,
       connectionType: connectionType,
       ssid: undefined,
-      bssid: undefined
+      bssid: undefined,
+      networkId: undefined
     };
 
     this.notifyListeners('networkStatusChange', status);
@@ -114,9 +125,11 @@ export class vyouPluginWeb extends WebPlugin implements vyouPluginPlugin {
       connected: false,
       connectionType: 'none',
       ssid: undefined,
-      bssid: undefined
+      bssid: undefined,
+      networkId: undefined
     };
 
     this.notifyListeners('networkStatusChange', status);
   };
 }
+

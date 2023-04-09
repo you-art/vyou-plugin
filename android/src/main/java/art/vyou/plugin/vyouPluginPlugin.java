@@ -1,14 +1,18 @@
 package art.vyou.plugin;
 
+import android.Manifest;
 import android.os.Build;
 import android.util.Log;
 import java.io.BufferedReader;
 
 import com.getcapacitor.JSObject;
+import com.getcapacitor.PermissionState;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
+import com.getcapacitor.annotation.Permission;
+import com.getcapacitor.annotation.PermissionCallback;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -28,10 +32,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-@CapacitorPlugin(name = "vyouPlugin")
+@CapacitorPlugin(name = "vyouPlugin", permissions = {
+        @Permission(strings = { Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION }, alias = "ACCESS_FINE_LOCATION"),
+        @Permission(strings = { Manifest.permission.ACCESS_COARSE_LOCATION }, alias = "COARSE_LOCATION")
+})
 public class vyouPluginPlugin extends Plugin {
     ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-  
+
     @PluginMethod
     public void ping(PluginCall call) {
         JSObject ret = new JSObject();
@@ -132,22 +140,23 @@ public class vyouPluginPlugin extends Plugin {
 
     @Override
     protected void handleOnStart() {
-  //      startSelectorThread();
-    //    LocalBroadcastManager.getInstance(getContext()).registerReceiver(dataForwardReceiver, new IntentFilter("capacitor-udp-forward"));
+        // startSelectorThread();
+        // LocalBroadcastManager.getInstance(getContext()).registerReceiver(dataForwardReceiver,
+        // new IntentFilter("capacitor-udp-forward"));
     }
 
     @Override
     protected void handleOnStop() {
         Log.i("lifecycle", "stop");
-       // stopSelectorThread();
+        // stopSelectorThread();
     }
 
     @Override
     protected void handleOnRestart() {
         Log.i("lifecycle", "restart");
-        //   startSelectorThread();
+        // startSelectorThread();
     }
-    
+
     private Network networkImpl;
     public static final String NETWORK_CHANGE_EVENT = "networkStatusChange";
 
@@ -180,13 +189,31 @@ public class vyouPluginPlugin extends Plugin {
 
     /**
      * Get current network status information.
+     * 
      * @param call
      */
     @PluginMethod
     public void getConnectionStatus(PluginCall call) {
         call.resolve(parseNetworkStatus(networkImpl.getNetworkStatus()));
+
+    }
+    @PluginMethod
+    public void requestDetailedNetworkStatus(PluginCall call) {
+        if (getPermissionState("ACCESS_FINE_LOCATION") != PermissionState.GRANTED) {
+            requestPermissionForAlias("ACCESS_FINE_LOCATION", call, "fineLocationCallback");
+        } else {
+            getConnectionStatus(call);
+        }
     }
 
+    @PermissionCallback
+    private void fineLocationCallback(PluginCall call) {
+        if (getPermissionState("ACCESS_FINE_LOCATION") == PermissionState.GRANTED) {
+            getConnectionStatus(call);
+        } else {
+            call.reject("Permission is required to safely find your screens");
+        }
+    }
 
     /**
      * Register the IntentReceiver on resume
@@ -222,6 +249,7 @@ public class vyouPluginPlugin extends Plugin {
         jsObject.put("connectionType", networkStatus.connectionType.getConnectionType());
         jsObject.put("ssid", networkStatus.ssid);
         jsObject.put("bssid", networkStatus.bssid);
+        jsObject.put("networkId", networkStatus.networkId);
         return jsObject;
     }
 }

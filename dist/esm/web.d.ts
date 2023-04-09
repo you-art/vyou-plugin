@@ -1,5 +1,5 @@
 import { WebPlugin } from '@capacitor/core';
-import type { vyouPluginPlugin, ConnectionStatus } from './definitions';
+import type { vyouPluginPlugin, ConnectionStatus, PermissionStatus } from './definitions';
 declare global {
     interface Navigator {
         connection: any;
@@ -9,6 +9,8 @@ declare global {
 }
 export declare class vyouPluginWeb extends WebPlugin implements vyouPluginPlugin {
     constructor();
+    checkPermissions(): Promise<PermissionStatus>;
+    requestDetailedNetworkStatus(): Promise<ConnectionStatus>;
     ping: (options: {
         ipAddress: string;
         timeOut: number | undefined;

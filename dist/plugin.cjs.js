@@ -69,7 +69,8 @@ class vyouPluginWeb extends core.WebPlugin {
                 connected,
                 connectionType: connected ? connectionType : 'none',
                 ssid: undefined,
-                bssid: undefined
+                bssid: undefined,
+                networkId: undefined
             };
             return status;
         };
@@ -79,7 +80,8 @@ class vyouPluginWeb extends core.WebPlugin {
                 connected: true,
                 connectionType: connectionType,
                 ssid: undefined,
-                bssid: undefined
+                bssid: undefined,
+                networkId: undefined
             };
             this.notifyListeners('networkStatusChange', status);
         };
@@ -88,7 +90,8 @@ class vyouPluginWeb extends core.WebPlugin {
                 connected: false,
                 connectionType: 'none',
                 ssid: undefined,
-                bssid: undefined
+                bssid: undefined,
+                networkId: undefined
             };
             this.notifyListeners('networkStatusChange', status);
         };
@@ -96,6 +99,12 @@ class vyouPluginWeb extends core.WebPlugin {
             window.addEventListener('online', this.handleOnline);
             window.addEventListener('offline', this.handleOffline);
         }
+    }
+    async checkPermissions() {
+        return { detailedNetwork: 'denied' };
+    }
+    requestDetailedNetworkStatus() {
+        throw this.unavailable('Permissions API not available in this browser');
     }
 }
 

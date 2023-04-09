@@ -15,6 +15,8 @@ npx cap sync
 
 * [`ping(...)`](#ping)
 * [`getConnectionStatus()`](#getconnectionstatus)
+* [`checkPermissions()`](#checkpermissions)
+* [`requestDetailedNetworkStatus()`](#requestdetailednetworkstatus)
 * [`addListener('networkStatusChange', ...)`](#addlistenernetworkstatuschange)
 * [`removeAllListeners()`](#removealllisteners)
 * [Interfaces](#interfaces)
@@ -51,6 +53,28 @@ Query the current status of the network connection.
 **Returns:** <code>Promise&lt;<a href="#connectionstatus">ConnectionStatus</a>&gt;</code>
 
 **Since:** 1.0.0
+
+--------------------
+
+
+### checkPermissions()
+
+```typescript
+checkPermissions() => Promise<PermissionStatus>
+```
+
+**Returns:** <code>Promise&lt;<a href="#permissionstatus">PermissionStatus</a>&gt;</code>
+
+--------------------
+
+
+### requestDetailedNetworkStatus()
+
+```typescript
+requestDetailedNetworkStatus() => Promise<ConnectionStatus>
+```
+
+**Returns:** <code>Promise&lt;<a href="#connectionstatus">ConnectionStatus</a>&gt;</code>
 
 --------------------
 
@@ -101,6 +125,14 @@ Represents the state and type of the network connection.
 | **`connectionType`** | <code><a href="#connectiontype">ConnectionType</a></code> | The type of network connection currently in use. If there is no active network connection, `connectionType` will be `'none'`. | 1.0.0 |
 | **`ssid`**           | <code>string</code>                                       |                                                                                                                               |       |
 | **`bssid`**          | <code>string</code>                                       |                                                                                                                               |       |
+| **`networkId`**      | <code>number</code>                                       |                                                                                                                               |       |
+
+
+#### PermissionStatus
+
+| Prop                  | Type                                                        | Description                                                                                                                                                                                 | Since |
+| --------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
+| **`detailedNetwork`** | <code><a href="#permissionstate">PermissionState</a></code> | Permission state for location alias. On Android it requests/checks both ACCESS_COARSE_LOCATION and ACCESS_FINE_LOCATION permissions. On iOS and web it requests/checks location permission. | 1.0.0 |
 
 
 #### PluginListenerHandle
@@ -118,6 +150,11 @@ Represents the state and type of the network connection.
 The type of network connection that a device might have.
 
 <code>'wifi' | 'cellular' | 'none' | 'unknown'</code>
+
+
+#### PermissionState
+
+<code>'prompt' | 'prompt-with-rationale' | 'granted' | 'denied'</code>
 
 
 #### ConnectionStatusChangeListener
