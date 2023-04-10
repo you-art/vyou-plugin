@@ -5,6 +5,7 @@ import android.os.Build;
 import android.util.Log;
 import java.io.BufferedReader;
 
+
 import com.getcapacitor.JSObject;
 import com.getcapacitor.PermissionState;
 import com.getcapacitor.Plugin;
@@ -249,7 +250,7 @@ public class vyouPluginPlugin extends Plugin {
         jsObject.put("connectionType", networkStatus.connectionType.getConnectionType());
         jsObject.put("ssid", networkStatus.ssid);
         jsObject.put("bssid", networkStatus.bssid);
-        jsObject.put("networkId", networkStatus.networkId);
+        jsObject.put("privateIp", networkStatus.privateIp);
         return jsObject;
     }
 }

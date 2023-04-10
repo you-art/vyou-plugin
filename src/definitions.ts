@@ -61,7 +61,7 @@ export interface ConnectionStatus {
 
   ssid: string | undefined;
   bssid: string | undefined;
-  networkId : number | undefined;
+  privateIp : number | undefined;
 }
 
 /**

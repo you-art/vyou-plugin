@@ -163,7 +163,7 @@
           "type": "string | undefined"
         },
         {
-          "name": "networkId",
+          "name": "privateIp",
           "tags": [],
           "docs": "",
           "complexTypes": [],

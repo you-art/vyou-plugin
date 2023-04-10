@@ -52,9 +52,9 @@ export interface ConnectionStatus {
      * @since 1.0.0
      */
     connectionType: ConnectionType;
-    ssid: string;
-    bssid: string;
-    networkId: number;
+    ssid: string | undefined;
+    bssid: string | undefined;
+    privateIp: number | undefined;
 }
 /**
  * Callback to receive the status change notifications.

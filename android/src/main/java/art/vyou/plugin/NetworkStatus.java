@@ -23,5 +23,5 @@ public class NetworkStatus {
     public ConnectionType connectionType = ConnectionType.NONE;
     public String ssid;
     public String bssid;
-    public Integer networkId;
+    public String privateIp;
 }

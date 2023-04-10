@@ -70,7 +70,7 @@ class vyouPluginWeb extends core.WebPlugin {
                 connectionType: connected ? connectionType : 'none',
                 ssid: undefined,
                 bssid: undefined,
-                networkId: undefined
+                privateIp: undefined
             };
             return status;
         };
@@ -81,7 +81,7 @@ class vyouPluginWeb extends core.WebPlugin {
                 connectionType: connectionType,
                 ssid: undefined,
                 bssid: undefined,
-                networkId: undefined
+                privateIp: undefined
             };
             this.notifyListeners('networkStatusChange', status);
         };
@@ -91,7 +91,7 @@ class vyouPluginWeb extends core.WebPlugin {
                 connectionType: 'none',
                 ssid: undefined,
                 bssid: undefined,
-                networkId: undefined
+                privateIp: undefined
             };
             this.notifyListeners('networkStatusChange', status);
         };

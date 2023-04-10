@@ -124,10 +124,17 @@ public class Network {
             networkStatus = getAndParseNetworkInfo();
         }
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+
         Log.i("WifiInfo: ", wifiInfo.toString());
         networkStatus.ssid = wifiInfo.getSSID();
         networkStatus.bssid = wifiInfo.getBSSID();
-        networkStatus.networkId = wifiInfo.getNetworkId();
+        final int ipAddress = wifiInfo.getIpAddress();
+        final String formattedIpAddress = String.format("%d.%d.%d.%d",
+                (ipAddress & 0xff),
+                (ipAddress >> 8 & 0xff),
+                (ipAddress >> 16 & 0xff),
+                (ipAddress >> 24 & 0xff));
+        networkStatus.privateIp = formattedIpAddress;
         return networkStatus;
     }
 
@@ -143,6 +150,7 @@ public class Network {
             } else if (typeName.equals("MOBILE")) {
                 networkStatus.connectionType = NetworkStatus.ConnectionType.CELLULAR;
             }
+
         }
         return networkStatus;
     }

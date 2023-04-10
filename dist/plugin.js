@@ -67,7 +67,7 @@ var capacitorvyouPlugin = (function (exports, core) {
                     connectionType: connected ? connectionType : 'none',
                     ssid: undefined,
                     bssid: undefined,
-                    networkId: undefined
+                    privateIp: undefined
                 };
                 return status;
             };
@@ -78,7 +78,7 @@ var capacitorvyouPlugin = (function (exports, core) {
                     connectionType: connectionType,
                     ssid: undefined,
                     bssid: undefined,
-                    networkId: undefined
+                    privateIp: undefined
                 };
                 this.notifyListeners('networkStatusChange', status);
             };
@@ -88,7 +88,7 @@ var capacitorvyouPlugin = (function (exports, core) {
                     connectionType: 'none',
                     ssid: undefined,
                     bssid: undefined,
-                    networkId: undefined
+                    privateIp: undefined
                 };
                 this.notifyListeners('networkStatusChange', status);
             };
