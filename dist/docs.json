@@ -227,6 +227,10 @@
           "complexTypes": []
         },
         {
+          "text": "'ethernet'",
+          "complexTypes": []
+        },
+        {
           "text": "'none'",
           "complexTypes": []
         },

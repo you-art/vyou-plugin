@@ -76,7 +76,7 @@ export type ConnectionStatusChangeListener = (status: ConnectionStatus) => void;
  *
  * @since 1.0.0
  */
-export type ConnectionType = 'wifi' | 'cellular' | 'none' | 'unknown';
+export type ConnectionType = 'wifi' | 'cellular' | 'ethernet' | 'none' | 'unknown';
 
 /**
  * @deprecated Use `ConnectionStatus`.

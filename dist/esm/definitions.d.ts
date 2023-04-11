@@ -67,7 +67,7 @@ export declare type ConnectionStatusChangeListener = (status: ConnectionStatus) 
  *
  * @since 1.0.0
  */
-export declare type ConnectionType = 'wifi' | 'cellular' | 'none' | 'unknown';
+export declare type ConnectionType = 'wifi' | 'cellular' | 'ethernet' | 'none' | 'unknown';
 /**
  * @deprecated Use `ConnectionStatus`.
  * @since 1.0.0

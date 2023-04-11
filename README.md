@@ -149,7 +149,7 @@ Represents the state and type of the network connection.
 
 The type of network connection that a device might have.
 
-<code>'wifi' | 'cellular' | 'none' | 'unknown'</code>
+<code>'wifi' | 'cellular' | 'ethernet' | 'none' | 'unknown'</code>
 
 
 #### PermissionState
