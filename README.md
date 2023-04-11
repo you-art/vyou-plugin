@@ -125,7 +125,7 @@ Represents the state and type of the network connection.
 | **`connectionType`** | <code><a href="#connectiontype">ConnectionType</a></code> | The type of network connection currently in use. If there is no active network connection, `connectionType` will be `'none'`. | 1.0.0 |
 | **`ssid`**           | <code>string</code>                                       |                                                                                                                               |       |
 | **`bssid`**          | <code>string</code>                                       |                                                                                                                               |       |
-| **`privateIp`**      | <code>number</code>                                       |                                                                                                                               |       |
+| **`privateIp`**      | <code>string</code>                                       |                                                                                                                               |       |
 
 
 #### PermissionStatus

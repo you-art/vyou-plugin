@@ -54,7 +54,7 @@ export interface ConnectionStatus {
     connectionType: ConnectionType;
     ssid: string | undefined;
     bssid: string | undefined;
-    privateIp: number | undefined;
+    privateIp: string | undefined;
 }
 /**
  * Callback to receive the status change notifications.

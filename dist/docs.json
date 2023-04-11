@@ -167,7 +167,7 @@
           "tags": [],
           "docs": "",
           "complexTypes": [],
-          "type": "number | undefined"
+          "type": "string | undefined"
         }
       ]
     },
