@@ -33,8 +33,6 @@ export interface vyouPluginPlugin {
    */
   removeAllListeners(): Promise<void>;
 
-
-
 }
 
 /**
