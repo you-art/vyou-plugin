@@ -1,6 +1,6 @@
 {
   "name": "@you-art/vyou-plugin",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "private": false,
   "description": "Vyou Specific Capacitor features",
   "main": "dist/plugin.cjs.js",
@@ -77,7 +77,5 @@
       "src": "android"
     }
   },
-  "dependencies": {
-
-  }
+  "dependencies": {}
 }
