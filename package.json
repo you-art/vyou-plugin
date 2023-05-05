@@ -1,6 +1,6 @@
 {
   "name": "@you-art/vyou-plugin",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "private": false,
   "description": "Vyou Specific Capacitor features",
   "main": "dist/plugin.cjs.js",
