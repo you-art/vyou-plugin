@@ -1,6 +1,6 @@
 {
   "name": "@you-art/vyou-plugin",
-  "version": "0.0.22",
+  "version": "0.0.5",
   "private": false,
   "description": "Vyou Specific Capacitor features",
   "main": "dist/plugin.cjs.js",
@@ -46,6 +46,7 @@
   },
   "devDependencies": {
     "@capacitor/android": "^5.0.0",
+    "@capacitor/cli": "^5.0.0",
     "@capacitor/core": "^5.0.0",
     "@capacitor/docgen": "^0.0.18",
     "@capacitor/ios": "^5.0.0",
