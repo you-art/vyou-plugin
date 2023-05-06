@@ -12,7 +12,7 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
-    "VyouPlugin.podspec"
+    "YouArtVyouPlugin.podspec"
   ],
   "author": "andreas@vyou.art",
   "license": "prop",
